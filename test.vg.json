@@ -38,7 +38,15 @@
 "range": ["#D3D3D3", "#fd8d3c", "#e6550d", "#000000"]
 
 },
-
+"legend": {
+  "tickCount": 4,
+  "values": [1,100,500,1000],
+  "title": "Total Allocated Investment ($mil)",
+  "titleAlign":"center",
+  "orient": "none",
+  "legendX": 425,
+  "legendY": 50
+}
 },
 "tooltip": [
 {"field": "properties.DISTRICT", "type": "nominal", "title":
@@ -89,6 +97,7 @@
 "range": ["#D3D3D3", "#fd8d3c", "#e6550d", "#000000"]
 
 }
+
 },
 "tooltip": [
 {"field": "properties.DISTRICT", "type": "nominal", "title":
