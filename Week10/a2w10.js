@@ -1,4 +1,4 @@
-var vg_1 = "ChoroplethW10.vg.json";
+var vg_1 = "choroplethW10.vg.json";
 vegaEmbed("#vis1", vg_1,{'actions':false}).then(function(result) {
 
 }).catch(console.error);
