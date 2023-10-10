@@ -1,15 +1,15 @@
 @font-face {
     font-family: "VIC-Regular";
-    src: url(Regular/VIC-Regular.woff);
+    src: url(VIC-Regular.woff);
   }
 
   @font-face {
     font-family: "VIC-Bold";
-    src: url(Bold/VIC-Bold.woff);
+    src: url(VIC-Bold.woff);
   }
   @font-face {
     font-family: "VIC-Medium";
-    src: url(Medium/VIC-Medium.woff);
+    src: url(VIC-Medium.woff);
   }
 
 
