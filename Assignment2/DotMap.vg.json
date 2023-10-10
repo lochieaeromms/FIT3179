@@ -1,0 +1,214 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {"text": "Weighted Geographic Center of Investment","align": "center" ,
+    "dx": 450, "dy":0},
+    "params": [
+        {"name": "Department",
+        "bind": { "input": "select", "options":[ null, "Health and human services", "Transport","Culture, sport and community", "Justice and emergency services"],
+        "labels": ["Show All", "Health and Human Services", "Transport","Culture, Sport and Community", "Justice and Emergency Services"],
+        "name": "Sector:"}
+                },
+        {"name": "Minimum_Project_Spend",
+        "value": 100,
+        "bind": {
+        "input": "range",
+        "min": 100,
+        "max": 1000,
+        "step": 50,
+        "name": "Minimum Project TEI ($mil): "
+                }}
+        
+            ],
+        "data": {
+        "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv", "format":{"type": "csv", "parse": {"TEI":"number", "Est_exp_to_date": "number","Remaining_exp":"number"}}
+    },
+    "transform": [{
+              "lookup": "State_Electorate",
+              "from":{
+                "data": {
+                  "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/Lat-Long.csv", "format":{"type": "csv", "parse": {"Y": "number","X":"number"}}
+                },
+                "key": "District",
+                "fields": ["X","Y"]
+              }
+              
+              
+            },{"calculate": "datum.X*datum.TEI", "as": "CostX"},
+              {"calculate": "datum.Y*datum.TEI", "as": "CostY"}
+            ],
+        "hconcat":[{
+
+
+     "width": 500,
+    "height": 500,
+    "projection": {"type": "identity","reflectY":true},
+    "layer": [{
+    "transform": [
+            {
+                "lookup": "State_Electorate",
+                "from": {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/STATE_ASSEMBLY_2022.json",
+                        "format": {"type": "topojson", "feature": "STATE_ASSEMBLY_2022"}
+                            },
+                "key": "properties.DISTRICT"
+                        },
+                "as": "geo"
+            },
+            
+
+
+
+    {"filter": "Department == null || datum.Sector == Department || datum.TEI == 0"},
+     {"filter": "datum.TEI > 1e6*Minimum_Project_Spend || datum.TEI == 0"},
+     {"calculate": "datum.TEI*1e-6", "as": "Scaled_TEI"},
+     {"calculate": "datum.Est_exp_to_date*1e-6", "as": "Scaled_EstEXP"}
+                ],
+
+   "mark": {"type": "geoshape","stroke":"black", "fill":"lightgray"},
+ "encoding": {
+    "detail": {"field": "State_Electorate"},
+ "shape": { 
+ "field": "geo",
+ "type": "geojson"
+ },
+
+ "tooltip": [
+{"field": "State_Electorate", "type": "nominal", "title":
+"District"},
+{"aggregate":"sum", "field": "Scaled_TEI", "type": "quantitative", "title": "Total Allocated Investment ($mil)","format": ".2f"},
+{"aggregate":"valid","field": "Project_type", "type": "quantitative", "title": "Number of Projects"},
+{"aggregate":"sum","field": "Scaled_EstEXP", "type": "quantitative", "title": "Capital Already Invested ($mil)","format": ".2f"}
+]
+ } }, {
+   
+     "mark": "circle",
+     "transform": [{"filter": "Department == null || datum.Sector == Department"},
+            {"filter": "datum.TEI > 1e6*Minimum_Project_Spend"},
+            {"calculate": "datum.TEI*datum.X", "as":"CostX"},
+            {"calculate": "datum.TEI*datum.Y", "as":"CostY"},
+            {"aggregate": [{"op":"sum","field": "CostX", "as": "summedX"},{"op":"sum","field": "CostY", "as": "summedY"}, {"op":"sum","field": "TEI", "as": "summedTEI"} ],"groupby": ["Budget_Year","Sector"]},
+            {"calculate": "datum.summedX/datum.summedTEI", "as": "fixedX"},
+            {"calculate": "datum.summedY/datum.summedTEI", "as": "fixedY"},
+            {"aggregate": [{"op":"average","field": "fixedX", "as": "plotX"},{"op":"average","field": "fixedY", "as": "plotY"}],"groupby": ["Budget_Year"]}
+
+            ],
+      "encoding": {
+        "x": {
+          "field": "plotX",
+          "type": "quantitative",
+          "scale":{"domain":[2126649.17, 2939751.05]},
+          "axis": {"domain": false, "grid": false, "ticks": false, "labels":false, "title":null}
+        },
+        "y": {
+          "field": "plotY",
+          "type": "quantitative",
+          "scale":{"domain":[2143000, 2940000.05]},
+          "axis": {"domain": false, "grid": false, "ticks": false, "labels":false, "title":null}
+
+        },
+        "size": {"value": 100},
+        "color": {"field": "Budget_Year", "type": "nominal"},
+        "opacity": {
+        "condition": {
+        "test": "length(data('data_2')) == 0" ,
+      "value": 1
+    },
+    "value": 1
+    },
+         "tooltip":[
+        {"field": "Budget_Year","type": "nominal", "title": "Budget Year"}
+        ]
+
+      }
+
+
+
+
+
+ }]
+    },
+    {   "width":300,
+        "height": 500,
+        "title":{"text":"Inset of Melbourne Metropolitan Districts","dy":125},
+        "projection": {"type": "identity","reflectY":true},
+        "layer":[{
+        "transform": [
+            {
+                "lookup": "State_Electorate",
+                "from": {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/Melbourne_Zoom.json",
+                        "format": {"type": "topojson", "feature": "STATE_ASSEMBLY_2022"}
+                            },
+                "key": "properties.DISTRICT"
+                        },
+                "as": "geo"
+            },
+
+            {"filter": "Department == null || datum.Sector == Department || datum.TEI == 0"},
+             {"filter": "datum.TEI > 1e6*Minimum_Project_Spend || datum.TEI == 0"},
+             {"calculate": "datum.TEI*1e-6", "as": "Scaled_TEI"},
+             {"calculate": "datum.Est_exp_to_date*1e-6", "as": "Scaled_EstEXP"}
+                ],
+
+   "mark": {"type": "geoshape","stroke":"black", "fill": "lightgray"},
+ "encoding": {
+    "detail": {"field": "State_Electorate"},
+ "shape": { 
+ "field": "geo",
+ "type": "geojson"
+ },
+ "tooltip": [
+{"field": "State_Electorate", "type": "nominal", "title":
+"District"},
+{"aggregate":"sum", "field": "Scaled_TEI", "type": "quantitative", "title": "Total Allocated Investment ($mil)","format": ".2f"},
+{"aggregate":"valid","field": "Project_type", "type": "quantitative", "title": "Number of Projects"},
+{"aggregate":"sum","field": "Scaled_EstEXP", "type": "quantitative", "title": "Capital Already Invested ($mil)","format": ".2f"}
+]
+ }
+    },{
+      
+     "mark": {"type":"circle", "clip": true},
+     "transform": [{"filter": "Department == null || datum.Sector == Department"},
+            {"filter": "datum.TEI > 1e6*Minimum_Project_Spend"},
+            {"calculate": "datum.TEI*datum.X", "as":"CostX"},
+            {"calculate": "datum.TEI*datum.Y", "as":"CostY"},
+            {"aggregate": [{"op":"sum","field": "CostX", "as": "summedX"},{"op":"sum","field": "CostY", "as": "summedY"}, {"op":"sum","field": "TEI", "as": "summedTEI"} ],"groupby": ["Budget_Year","Sector"]},
+            {"calculate": "datum.summedX/datum.summedTEI", "as": "fixedX"},
+            {"calculate": "datum.summedY/datum.summedTEI", "as": "fixedY"},
+            {"aggregate": [{"op":"average","field": "fixedX", "as": "plotX"},{"op":"average","field": "fixedY", "as": "plotY"}],"groupby": ["Budget_Year"]}
+
+            ],
+      "encoding": {
+        "x": {
+          "field": "plotX",
+          "type": "quantitative",
+          "scale":{"domain":[2413077, 2555595],"nice":false},
+          "axis": {"domain": false, "grid": false, "ticks": false, "labels":false, "title":null}
+        },
+        "y": {
+          "field": "plotY",
+          "type": "quantitative",
+          "scale":{"domain":[2260213, 2503319],"nice":false},
+          "axis": {"domain": false, "grid": false, "ticks": false, "labels":false, "title":null}
+
+        },
+        "size": {"value": 100},
+        "color": {"field": "Budget_Year", "type": "nominal","scale": {"range":["#e41b4d", "#d7b5d8", "#df65b0","#f1eef6" ]},"legend": null},
+        "opacity": {
+        "condition": {
+        "test": "length(data('data_2')) == 0" ,
+      "value": 1
+    },
+    "value": 1
+    },
+        "tooltip":[
+        {"field": "Budget_Year","type": "nominal", "title": "Budget Year"}
+        ]
+
+      }
+ }]}
+    ],
+    "config": {"view": {"stroke": null},"font":"VIC-Regular"}
+}

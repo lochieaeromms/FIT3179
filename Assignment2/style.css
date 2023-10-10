@@ -1,0 +1,77 @@
+@font-face {
+    font-family: "VIC-Regular";
+    src: url(Regular/VIC-Regular.woff);
+  }
+
+  @font-face {
+    font-family: "VIC-Bold";
+    src: url(Bold/VIC-Bold.woff);
+  }
+  @font-face {
+    font-family: "VIC-Medium";
+    src: url(Medium/VIC-Medium.woff);
+  }
+
+
+
+body {
+    font-family: "VIC-Regular","Arial","Helvetica","sans-serif";
+    padding: 30px;
+}
+
+h1{
+    color: #e41b4d;
+    font-size: 50px;
+    font-weight: 400;
+    font-family: "VIC-Bold","Arial","Helvetica","sans-serif";
+}
+
+h3{ 
+    color: black;
+
+    font-size: 30px;
+    font-weight: bold;
+    font-family:  "VIC-Medium","Arial","Helvetica","sans-serif";
+}
+
+
+h5{
+ margin-bottom: 0px;
+}
+
+.vega-bindings {
+  display: flex;
+
+}
+
+.vega-bind{
+  padding: 50px;
+}
+
+#vis1{
+  padding-left: 150px;
+}
+
+#visheader{
+  text-align: center;
+  font-family:"VIC-Medium","Arial","Helvetica","sans-serif";
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: 30px;
+}
+
+#BasicInfo{
+  font-size: 25px;
+}
+
+#vis5{
+  text-align: center;
+}
+
+p{
+  padding: 20px;
+}
+
+#vis6{
+  padding-left: 50px;
+}

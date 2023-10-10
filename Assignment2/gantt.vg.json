@@ -1,0 +1,27 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 1000,
+    "title": "Project Delivery Timeline",
+   "data": {"name": "data1",
+        "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv"
+      },
+      "transform": [{"filter": "datum.Start_date!= null & datum.Estimated_completion_date!=null & datum.Completion_date != null"}],
+      "layer":[{
+    "mark": "bar",
+    "encoding": {
+      "y": {"field": "Project_name", "type": "nominal","title":null, "axis":{"labelLimit":500, "labelPadding":10}},
+      "x": {"field": "Start_date", "type": "temporal","title":null,"axis":{"format": "%b-%Y","formatType": "time"}},
+      "x2": {"field": "Estimated_completion_date"},
+      "color": {"value":"#e41b4d"}
+    }
+    },{
+    "mark": "bar",
+    "encoding": {
+      "y": {"field": "Project_name", "type": "nominal"},
+      "x": {"field": "Start_date", "type": "temporal"},
+      "x2": {"field": "Completion_date"},
+      "color": {"value":"#d7b5d8"}, "opacity": {"value":0.7}
+    }
+    } ],
+       "config": {"view": {"stroke": null},"font":"VIC-Regular"}
+  }

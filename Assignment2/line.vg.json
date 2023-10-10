@@ -1,0 +1,76 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,
+    "height": 400,
+    "data": { "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/regprop.csv" },
+    "title": "Proportion of Investment in designated Regional Districts",
+    "layer":[{
+    "mark": "line",
+    "encoding": {
+      "y": {"field": "Proportion", "title": "Regional Spending Proportion (%)", "type":"quantitative"
+      },
+      "x": {"field": "Year", "title": "Budget Year", "axis": {"labelAngle": 0,"ticks": false}},
+      "color": {
+        "scale": {"range":["#e41b4d", "#cccccc", "#969696","#636363","#252525"]},
+        "legend":null,
+      "field": "Sector"
+      }, "strokeDash": {"field": "Sector", "type": "nominal", "legend":null},
+        
+      "tooltip": [  {"field": "Sector", "type": "nominal", "title": "Sector"}
+        ,{"field": "Proportion", "type": "nominal", "title": "Regional Spending Rate (%)"}
+        
+      ]
+    }
+}, {
+    "mark": {
+      "type": "point",
+      "filled": true
+    },
+    
+    "encoding": {
+        "y": {"field": "Proportion", "title": "Regional Spending Proportion", "type":"quantitative"
+      },
+      "x": {"field": "Year", "title": "Budget Year", "axis": {"labelAngle": 0,"ticks": false}},
+      "color": {
+        "field": "Sector",
+        "scale": {"range":["#e41b4d", "#cccccc", "#969696","#636363","#252525"]},
+        "legend": null
+      },
+      "size": {"value": 50},
+      "opacity": {"value": 1},
+      "tooltip": [  {"field": "Sector", "type": "nominal", "title": "Sector"}
+      ,{"field": "Proportion", "type": "nominal", "title": "Regional Spending Rate (%)"}
+      
+    ]
+    }
+  }, {
+    "mark": {"type": "text",
+    "align": "left",
+    "baseline": "bottom",
+    "dx": 20,
+    "dy":{"expr": "if(datum.Sector=='Transport',2,5)"},
+    "angle":340,
+    "fontSize": 10},
+    "transform": [{"filter": "datum.Year=='2023-24'"}],
+    "encoding": {
+        "x": {"field": "Year","type": "nominal"},
+        "y": {"field": "Proportion","type": "quantitative"},
+        "text": {"field": "Sector", "type": "nominal"},
+        "opacity": {
+            "condition":{
+            "test": "datum.Year=='2023-24'", "value": 1}, "value":0
+        }
+
+        }
+    }
+    
+  ],
+    "config": {
+        "font": "VIC-Regular",
+        "style": {
+          "cell": {
+            "stroke": "transparent"
+          }
+        }
+      }
+}  

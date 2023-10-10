@@ -1,0 +1,246 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "params": [{
+        "name": "Budget_Year",
+        "bind": { "input": "select", "options":["2016-17", "2019-20","2023-24"],
+        "labels": ["2016-17", "2019-20","2023-24"],
+        "name": "Budget Year:"
+                }
+                },
+        {"name": "Department",
+        "bind": { "input": "select", "options":[ null, "Health and human services", "Transport","Culture, sport and community", "Justice and emergency services"],
+        "labels": ["Show All", "Health and Human Services", "Transport","Culture, Sport and Community", "Justice and Emergency Services"],
+        "name": "Sector:"}
+                },
+        {"name": "Minimum_Project_Spend",
+        "value": 100,
+        "bind": {
+        "input": "range",
+        "min": 100,
+        "max": 1000,
+        "step": 50,
+        "name": "Minimum Project TEI ($mil): "
+                }},
+        {"name": "NewOrExisting",
+        "bind": { "input": "select", "options":[null,"New", "Existing"],
+        "labels": ["Show All","New Projects", "Existing Projects"],
+        "name": "New or Existing Projects:"}
+                }
+        
+            ],
+        "data": {
+        "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv", "format":{"type": "csv", "parse": {"TEI":"number", "Est_exp_to_date": "number","Remaining_exp":"number"}}
+    },
+        "vconcat":[{"hconcat":[{
+
+
+     "width": 1000,
+    "height": 700,
+    "projection": {"type": "identity","reflectY":true},
+    "transform": [
+            {
+                "lookup": "State_Electorate",
+                "from": {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/STATE_ASSEMBLY_2022.json",
+                        "format": {"type": "topojson", "feature": "STATE_ASSEMBLY_2022"}
+                            },
+                "key": "properties.DISTRICT"
+                        },
+                "as": "geo"
+            },
+
+
+
+     {"filter": "Budget_Year == null && datum.Budget_Year == '2016-17'|| datum.Budget_Year == Budget_Year"},
+    {"filter": "Department == null || datum.Sector == Department || datum.TEI == 0"},
+     {"filter": "datum.TEI > 1e6*Minimum_Project_Spend || datum.TEI == 0"},
+     {"filter": "NewOrExisting == null || datum.Project_type == NewOrExisting  || datum.TEI == 0"},
+     {"calculate": "datum.TEI*1e-6", "as": "Scaled_TEI"},
+     {"calculate": "datum.Est_exp_to_date*1e-6", "as": "Scaled_EstEXP"}
+                ],
+
+   "mark": {"type": "geoshape","stroke":"black"},
+ "encoding": {
+    "detail": {"field": "State_Electorate"},
+ "shape": { 
+ "field": "geo",
+ "type": "geojson"
+ },
+ "color": {"aggregate":"sum","field": "Scaled_TEI", "type": "quantitative","scale": {
+"type": "threshold",
+"domain": [100,500,1000],
+"range": ["#f1eef6", "#d7b5d8", "#df65b0", "#e41b4d"]
+
+
+},
+ "legend": {
+  "tickCount": 4,
+  "values": [1,100,500,1000],
+  "title": "Total Expected Investment - TEI ($mil)",
+  "titleAlign":"center",
+  "orient": "none",
+  "titleLimit": 300,
+  "legendX": 800,
+  "legendY": 200,
+  "labelFont":"VIC-Regular",
+  "titleFont":"VIC-Bold"
+}
+ },
+
+ "tooltip": [
+{"field": "State_Electorate", "type": "nominal", "title":
+"District"},
+{"aggregate":"sum", "field": "Scaled_TEI", "type": "quantitative", "title": "Total Allocated Investment ($mil)","format": ".2f"},
+{"aggregate":"valid","field": "Project_type", "type": "quantitative", "title": "Number of Projects"},
+{"aggregate":"sum","field": "Scaled_EstEXP", "type": "quantitative", "title": "Capital Already Invested ($mil)","format": ".2f"}
+]
+ }
+    },
+    {   "width":600,
+        "height": 600,
+        "title":{"text":"Inset of Melbourne Metropolitan Districts","dy":50, "font":"VIC-Bold"},
+        "projection": {"type": "identity","reflectY":true},
+        "transform": [
+            {
+                "lookup": "State_Electorate",
+                "from": {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/Melbourne_Zoom.json",
+                        "format": {"type": "topojson", "feature": "STATE_ASSEMBLY_2022"}
+                            },
+                "key": "properties.DISTRICT"
+                        },
+                "as": "geo"
+            },
+
+
+
+            {"filter": "Budget_Year == null && datum.Budget_Year == '2016-17'|| datum.Budget_Year == Budget_Year"},
+            {"filter": "Department == null || datum.Sector == Department || datum.TEI == 0"},
+             {"filter": "datum.TEI > 1e6*Minimum_Project_Spend || datum.TEI == 0"},
+             {"filter": "NewOrExisting == null || datum.Project_type == NewOrExisting  || datum.TEI == 0"},
+             {"calculate": "datum.TEI*1e-6", "as": "Scaled_TEI"},
+             {"calculate": "datum.Est_exp_to_date*1e-6", "as": "Scaled_EstEXP"}
+                ],
+
+   "mark": {"type": "geoshape","stroke":"black"},
+ "encoding": {
+    "detail": {"field": "State_Electorate"},
+ "shape": { 
+ "field": "geo",
+ "type": "geojson"
+ },
+ "color": {"aggregate":"sum","field": "Scaled_TEI", "type": "quantitative","scale": {
+"type": "threshold",
+"domain": [100,500,1000],
+"range": ["#f1eef6", "#d7b5d8", "#df65b0", "#e41b4d"]
+
+}
+ },
+ "tooltip": [
+{"field": "State_Electorate", "type": "nominal", "title":
+"District"},
+{"aggregate":"sum", "field": "Scaled_TEI", "type": "quantitative", "title": "Total Allocated Investment ($mil)","format": ".2f"},
+{"aggregate":"valid","field": "Project_type", "type": "quantitative", "title": "Number of Projects"},
+{"aggregate":"sum","field": "Scaled_EstEXP", "type": "quantitative", "title": "Capital Already Invested ($mil)","format": ".2f"}
+]
+ }
+    }
+    ]},{  
+  
+    "width":1600,
+    "height": 500,
+    "transform": [
+      {"window": [{"op": "row_number", "as": "row_num"}]},
+      {"filter": {"field": "row_num", "lte": "count"}},
+      {"calculate": "''" , "as": "a"},
+         {"calculate": "''" , "as": "d"},
+     {"filter": "Budget_Year == null && datum.Budget_Year == '2016-17'|| datum.Budget_Year == Budget_Year"},
+    {"filter": "Department == null || datum.Sector == Department"},
+     {"filter": "datum.TEI > 1e6*Minimum_Project_Spend"},
+     {"filter": "NewOrExisting == null || datum.Project_type == NewOrExisting"},
+     {"calculate": "round(datum.TEI*1e-6,0)" ,"as": "Scaled_TEI"},
+     {"calculate": "round(datum.Remaining_exp*1e-6,0)" ,"as": "REI"},
+      {"fold": ["d","Project_name","a","State_Electorate", "Sector", "Earliest_budget_year", "Est_completion_date","Project_type", "Scaled_TEI" ,"REI"]}
+      
+    ],
+
+    "layer":[{
+    "mark": {"type": "text", "fontSize":11, "font":"VIC-Regular"},
+    "encoding": {
+      "y": {"field": "row_num", "type": "ordinal", "axis": null},
+      "text": {"field": "value", "type": "nominal"},
+      "x": {"field": "key", "type": "nominal", "axis": {"orient": "top", "labelAngle": 0, "title": null, "domain": false, "ticks": false,"labelExpr": "''", "labelPadding":0,"titlePadding":0}, "scale": {"padding":50,"paddingOuter":0.5}, "sort": null}
+    }
+    },
+    { "data": { "name": "test","url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
+      "mark": {"type": "text", "fontSize" :25, "fontWeight":"bold", "align" : "center", "dy": 0, "dx": 0,"font": "VIC-Bold"},      
+          "transform": [{"filter": "datum.Fixed_notes=='The TEI has increased by $54.188 million due to a revised project scope to include a helipad and a 400-space car park.'"}],
+          "encoding": {
+            "text": {"value": ["No Projects Meeting Filters"]},
+                  "color": {"value": "black"},
+    "opacity": {
+    "condition": {
+    "test": "length(data('data_2')) == 0" ,
+    "value": 1
+    },
+    "value": 0
+    }
+        }},{ "data": { "name": "test","url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
+      "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": -260, "dx": -550,"font":"VIC-Bold"},      
+          "transform": [{"filter": "datum.Fixed_notes=='The TEI has increased by $54.188 million due to a revised project scope to include a helipad and a 400-space car park.'"}],
+          "encoding": {
+            "text": {"value": ["Project Name"]},
+                  "color": {"value": "black"}
+        }},{ "data": { "name": "test","url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
+        "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": -260, "dx": -240,"font":"VIC-Bold"},      
+            "transform": [{"filter": "datum.Fixed_notes=='The TEI has increased by $54.188 million due to a revised project scope to include a helipad and a 400-space car park.'"}],
+            "encoding": {
+              "text": {"value": ["State District"]},
+                    "color": {"value": "black"}
+          }},{ "data": { "name": "test","url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
+      "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": -260, "dx": -80,"font":"VIC-Bold"},      
+          "transform": [{"filter": "datum.Fixed_notes=='The TEI has increased by $54.188 million due to a revised project scope to include a helipad and a 400-space car park.'"}],
+          "encoding": {
+            "text": {"value": ["Sector"]},
+                  "color": {"value": "black"}
+        }},{ "data": { "name": "test","url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
+      "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": -260, "dx": 80,"font":"VIC-Bold"},      
+          "transform": [{"filter": "datum.Fixed_notes=='The TEI has increased by $54.188 million due to a revised project scope to include a helipad and a 400-space car park.'"}],
+          "encoding": {
+            "text": {"value": ["First Year On Budget"]},
+                  "color": {"value": "black"}
+        }},{ "data": { "name": "test","url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
+      "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": -260, "dx": 250,"font":"VIC-Bold"},      
+          "transform": [{"filter": "datum.Fixed_notes=='The TEI has increased by $54.188 million due to a revised project scope to include a helipad and a 400-space car park.'"}],
+          "encoding": {
+            "text": {"value": ["Expected Completion"]},
+                  "color": {"value": "black"}
+        }},{ "data": { "name": "test","url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
+      "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": -260, "dx": 400,"font":"VIC-Bold"},      
+          "transform": [{"filter": "datum.Fixed_notes=='The TEI has increased by $54.188 million due to a revised project scope to include a helipad and a 400-space car park.'"}],
+          "encoding": {
+            "text": {"value": ["Project Type"]},
+                  "color": {"value": "black"}
+        }},{ "data": { "name": "test","url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
+      "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": -260, "dx":560,"font":"VIC-Bold"},      
+          "transform": [{"filter": "datum.Fixed_notes=='The TEI has increased by $54.188 million due to a revised project scope to include a helipad and a 400-space car park.'"}],
+          "encoding": {
+            "text": {"value": ["Total Expected Investment ($mil)"]},
+                  "color": {"value": "black"}
+        }},{ "data": { "name": "test","url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
+      "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": -260, "dx":740,"font":"VIC-Bold"},      
+          "transform": [{"filter": "datum.Fixed_notes=='The TEI has increased by $54.188 million due to a revised project scope to include a helipad and a 400-space car park.'"}],
+          "encoding": {
+            "text": {"value": ["Remaining Expenditure ($mil)"]},
+                  "color": {"value": "black"}
+        }}]
+  
+    
+    
+    
+    }
+  ],
+    "config": {"view": {"stroke": null}}
+}

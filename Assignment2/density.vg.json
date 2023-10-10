@@ -1,0 +1,74 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {"text": "Probability Density of Project Costs by Sector and Year", "dx": 0, "anchor": "middle" },
+    "data": {
+      "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv"
+    },
+    "config": {
+        "font": "VIC-Regular",
+        "style": {
+          "cell": {
+            "stroke": "transparent"
+          }
+        }
+      },
+     "vconcat":[{ 
+    "hconcat":[{
+    "mark": "area",
+     "height":500,
+     "width":150,
+    "transform": [{"filter": "datum.TEI != 0"},
+    {"calculate": "round(datum.TEI*1e-6,0)", "as": "scaled_TEI"},
+    {"filter": "datum.Budget_Year=='2016-17'"},
+      {
+        "density": "scaled_TEI",
+        "groupby": ["Sector"],
+        "extent": [100,3500]
+      }
+    ],
+    "encoding": {
+      "x": {"field": "value", "type": "quantitative", "title": null,"axis":{"gridOpacity":0}},
+      "y": {"field": "density", "type": "quantitative", "stack": "zero", "scale": {"domain": [0, 0.009]},"axis":{"gridOpacity":0},"title":"Probability Density"},
+      "color": {"field": "Sector", "type": "nominal"}
+    }},{
+    "mark": "area", "height":500,"width":150,
+    "transform": [{"filter": "datum.TEI != 0"},
+    {"filter": "datum.Budget_Year=='2019-20'"},
+    {"calculate": "round(datum.TEI*1e-6,0)", "as": "scaled_TEI"},
+      {
+        "density": "scaled_TEI",
+        "groupby": ["Sector"],
+        "extent": [100,3500]
+      }
+    ],
+    "encoding": {
+      "x": {"field": "value", "type": "quantitative", "title": null,"axis":{"gridOpacity":0}},
+      "y": {"field": "density", "type": "quantitative", "stack": "zero", "scale": {"domain": [0, 0.009]},"axis":null},
+      "color": {"field": "Sector", "type": "nominal","scale": {"range":["#e41b4d", "#d7b5d8", "#df65b0","#f1eef6" ]},"legend": {"legendX":350,"legendY":150, "orient": "none"}}
+    }},{
+    "mark": "area",
+     "height":500,
+     "width":150,
+    "transform": [{"filter": "datum.TEI != 0"},
+    {"calculate": "round(datum.TEI*1e-6,0)", "as": "scaled_TEI"},
+    {"filter": "datum.Budget_Year=='2023-24'"},
+      {
+        "density": "scaled_TEI",
+        "groupby": ["Sector"],
+        "extent": [100,3500]
+      }
+    ],
+    "encoding": {
+      "x": {"field": "value", "type": "quantitative", "title":  null,"axis":{"gridOpacity":0}},
+      "y": {"field": "density", "type": "quantitative", "stack": "zero", "scale": {"domain": [0, 0.009]},"axis":null},
+      "color": {"field": "Sector", "type": "nominal"}
+    }
+      
+}]},{
+    "mark":{"type": "text", "align":"center","dx": 250,"fontWeight":"bold"},
+    "transform": [{"filter":"datum.Project_name=='New Tarneit railway station'"}],
+    "encoding": {"text":{"value": "Cost of Project ($mil)"}}
+}
+]   
+  }
+  

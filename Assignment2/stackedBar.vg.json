@@ -1,0 +1,138 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,
+    "height": 400,
+    "data": { "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
+    "title": "Distribution of Investment by Sector",
+      "params":[
+     {"name": "NewOrExisting",
+          "bind": { "input": "select", "options":[null,"New", "Existing"],
+          "labels": ["Show All","New Projects", "Existing Projects"],
+          "name": "New or Existing Projects:"}
+                  }],
+    "layer":[{
+    "transform": [{"filter": "NewOrExisting == null || datum.Project_type == NewOrExisting  || datum.TEI == 0"},{
+      "aggregate": [{
+         "op": "sum",
+         "field": "TEI",
+         "as": "total_TEI"
+        }, {"op": "count","field": "TEI","as": "NProjects"}],
+        "groupby": ["Budget_Year", "Sector"]
+      },
+       {
+                  "lookup": "Budget_Year",
+                  "from": {
+                      "data": {
+                          "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/CIP.csv","format":{"type": "csv", "parse": {"TEI":"number"}}
+                          },
+                  "key": "Budget_Year",
+                  "fields": ["TEI"]
+                  }
+                  
+                  
+              },
+     
+      
+      {"filter": "datum.Sector != ''"},
+      {"calculate": "100*datum.total_TEI / datum.TEI" ,"as": "rate"}],
+    "mark": "bar",
+    "encoding": {
+      "y": {
+        "aggregate": "sum", "field": "rate",
+        "title": "Percentage of Capital Investment",
+        "stack":  "zero",
+        "scale": {"domain": [0, 50]}
+      },
+      "x": {"field": "Budget_Year", "title": "Budget Year","axis": {"labelAngle": 0,"ticks": false}},
+      "color": {
+        "scale": {"range":["#e41b4d", "#d7b5d8", "#df65b0","#f1eef6" ]},
+      "field": "Sector",
+      "legend":{
+        "offset":-30,
+        "orient": "right"
+      }
+      },
+      "tooltip": [
+     {"field": "Sector", "type": "nominal", "title": "Sector"},
+  {"field": "rate", "type": "quantitative", "title": "Percentage of Yearly Capital Investment (%)","format": ".2f"},
+  {"field": "NProjects", "type": "quantitative", "title": "Number of Projects"}
+  
+  
+  
+  ]
+    }
+  
+                  
+                  },{ 
+        "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": -70, "dx": 200},      
+         "transform": [{"filter": "NewOrExisting == null || datum.Project_type == NewOrExisting  || datum.TEI == 0"},{
+      "aggregate": [{
+         "op": "sum",
+         "field": "TEI",
+         "as": "total_TEI"
+        }, {"op": "count","field": "TEI","as": "NProjects"}],
+        "groupby": ["Budget_Year", "Sector"]
+      }],
+        "encoding": {
+          "text": {"value": ["Post Covid (2023-24), the majority of investment", "is tied up in existing projects"]},
+                "color": {"value": "black"},
+  "opacity": {
+  "condition": {
+  "test": "NewOrExisting=='Existing' && datum.Budget_Year=='2023-24' && datum.Sector=='Transport'" ,
+  "value": 1
+  },
+  "value": 0
+  }
+      }},{ 
+        "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": 130, "dx": 200},     
+         "transform": [{"filter": "NewOrExisting == null || datum.Project_type == NewOrExisting  || datum.TEI == 0"},{
+      "aggregate": [{
+         "op": "sum",
+         "field": "TEI",
+         "as": "total_TEI"
+        }, {"op": "count","field": "TEI","as": "NProjects"}],
+        "groupby": ["Budget_Year", "Sector"]
+      }], 
+        "encoding": {
+          "text": {"value": ["Post Covid (2023-24)", "there are only 6 new Major Projects"]},
+                "color": {"value": "black"},
+  "opacity": {
+  "condition": {
+  "test": "NewOrExisting=='New' && datum.Budget_Year=='2023-24' && datum.Sector=='Transport'" ,
+  "value": 1
+  },
+  "value": 0
+  }
+      }},
+      { 
+        "mark": {"type": "text", "fontSize" : 11, "fontWeight":"bold", "align" : "center", "dy": 0, "dx": 0},   
+         "transform": [{"filter": "NewOrExisting == null || datum.Project_type == NewOrExisting  || datum.TEI == 0"},{
+      "aggregate": [{
+         "op": "sum",
+         "field": "TEI",
+         "as": "total_TEI"
+        }, {"op": "count","field": "TEI","as": "NProjects"}],
+        "groupby": ["Budget_Year", "Sector"]
+      }],   
+        "encoding": {
+          "text": {"value": ["Pre Covid (2019-20) the rate", "of major projects as a proportion", "of the total Capital Investment", "Program peaks"]},
+                "color": {"value": "black"},
+  "opacity": {
+  "condition": {
+  "test": "NewOrExisting==null && datum.Budget_Year=='2023-24' && datum.Sector=='Transport'" ,
+  "value": 1
+  },
+  "value": 0
+  }
+      }}
+                  ],
+                  "config": {
+                    "font": "VIC-Regular",
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  }
+  }
+  
