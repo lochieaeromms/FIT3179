@@ -27,7 +27,7 @@
       }
     ],
     "encoding": {
-      "x": {"field": "value", "type": "quantitative", "title": null,"axis":{"gridOpacity":0}},
+      "x": {"field": "value", "type": "quantitative", "title": "2016-17","axis":{"gridOpacity":0}},
       "y": {"field": "density", "type": "quantitative", "stack": "zero", "scale": {"domain": [0, 0.009]},"axis":{"gridOpacity":0},"title":"Probability Density"},
       "color": {"field": "Sector", "type": "nominal"}
     }},{
@@ -42,7 +42,7 @@
       }
     ],
     "encoding": {
-      "x": {"field": "value", "type": "quantitative", "title": null,"axis":{"gridOpacity":0}},
+      "x": {"field": "value", "type": "quantitative", "title": "2019-20","axis":{"gridOpacity":0}},
       "y": {"field": "density", "type": "quantitative", "stack": "zero", "scale": {"domain": [0, 0.009]},"axis":null},
       "color": {"field": "Sector", "type": "nominal","scale": {"range":["#e41b4d", "#d7b5d8", "#df65b0","#f1eef6" ]},"legend": {"legendX":350,"legendY":150, "orient": "none"}}
     }},{
@@ -59,7 +59,7 @@
       }
     ],
     "encoding": {
-      "x": {"field": "value", "type": "quantitative", "title":  null,"axis":{"gridOpacity":0}},
+      "x": {"field": "value", "type": "quantitative", "title":  "2023-24","axis":{"gridOpacity":0}},
       "y": {"field": "density", "type": "quantitative", "stack": "zero", "scale": {"domain": [0, 0.009]},"axis":null},
       "color": {"field": "Sector", "type": "nominal"}
     }
