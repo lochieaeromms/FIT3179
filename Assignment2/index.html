@@ -1,181 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <title>Lochie GP FIT3179 Submissions</title>
+  <head>
+    <title>Presentation Page</title>
+    <meta property="og:title" content="Presentation Page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-    <link rel="stylesheet" href="style.css">
+    
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: "VIC-Regular","Arial","Helvetica","sans-serif";;
+        font-size: 18px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.55;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <style>
+      html {
+      scroll-behavior: smooth;
+      }
+    </style>
     <script src="a2.js"></script>
-</head>
-<body>
-    <div class="pure-g">
-        <div class="pure-u-1-1">
-            <h1 id="Main Header">Major Infrastructure Spending in Victoria</h1>
-            <div class="pure-g">
-                <div class="pure-u-1-3">
-            <h3 id="Subtitle">In the budget years of 2016-17, 2019-20 and 2023-24</h3>
+  </head>
+  <body>
+    <link rel="stylesheet" href="./style.css" />
+    <div>
+      <link href="./index.css" rel="stylesheet" />
+
+      <div class="home-container">
+        <div class="home-hero">
+          <h1 class="home-heading">
+            Major Infrastructure Spending in Victoria
+          </h1>
+          <div class="home-hero-text-container">
+            <span class="home-text">
+              In the budget years of 2016-17, 2019-20 and 2023-24
+            </span>
+          </div>
+        </div>
+
+        <div class="home-service-card">
+          <div class="home-card-content">
+            <h3 id="vis1"></h3>
+          </div>
+          <div id="features" class="home-features">
+            <div class="home-cards-container">
+              <div class="home-feature-card">
+                <span class="home-heading1 Card-Heading">
+                  Text Batch A about Plots
+                </span>
+                <span class="home-text03 Card-Text">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer nec odio. Praesent libero. Sed cursus ante dapibus
+                  diam.c Sed nisi. Nulla quis sem at nibh elementum imperdiet.
+                </span>
+              </div>
+              <div class="home-feature-card1">
+                <span class="home-heading2 Card-Heading">
+                  Text Batch B about Plots
+                </span>
+                <span class="home-text04 Card-Text">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer nec odio. Praesent libero. Sed cursus ante dapibus
+                  diam.c Sed nisi. Nulla quis sem at nibh elementum imperdiet.
+                </span>
+              </div>
+              <div class="home-feature-card2">
+                <span class="home-heading3 Card-Heading">
+                  Text Batch C about Plots
+                </span>
+                <span class="home-text05 Card-Text">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer nec odio. Praesent libero. Sed cursus ante dapibus
+                  diam.c Sed nisi. Nulla quis sem at nibh elementum imperdiet.
+                </span>
+              </div>
             </div>
-            <div class = "pure-u-2-3" id='visheader'>Major Infrastructure Projects by State District</div>
+          </div>
         </div>
+        <div class="home-hero1">
+          <h3 class="home-heading4">Spending Distribution by Sector</h3>
         </div>
-    </div>
-    <div class="pure-g">
-        <div class="pure-u-1-5">
-            <div class="pure-g">
-                <div class="pure-u-1-1">
-                    <div class="pure-g">
-                        <div class="pure-u-1-1" id="BasicInfo"><p>Since we came to government, we haven’t
-                            wasted a day delivering the services and
-                            projects that matter to Victorians.
-                            Health systems around the world were hit hard
-                            by the pandemic, and ours was no different.
-                            But we’ve invested in our hospitals – and the
-                            dedicated workers we need to run them – so
-                            Victorians can get the very best care.
-                            Cranes dominate our skyline. Underground,
-                            we’re just as busy, building the transport
-                            network of the future.
-                            We’re building, fixing and widening our
-                            suburban and regional roads to cut congestion
-                            and get Victorians home to their families
-                            sooner and safer.
-                            We've put power back in the hands of
-                            Victorians with the popular $250 Power Saving
-                            Bonus. It's helping households across the state
-                            get the best deal on their energy bills, while
-                            providing the cost of living relief Victorians
-                            need right now.
-                            We’re giving Victorian kids the best start in life –
-                            we’ve invested in hundreds of school upgrades
-                            across Victoria to deliver high‑quality classrooms
-                            and facilities to make sure every student gets the
-                            world-class education they deserve.
-                            From Wangaratta to Warrnambool, we’re
-                            building the road and rail, schools and
-                            hospitals that country communities deserve.
-                            And when our regions have faced the toughest
-                            of times – from bushfires to floods – we’ve been
-                            there to help</p></div>
-                    </div>
-                </div>
+        <div id="services" class="home-services">
+          <div class="home-service-card1">
+            <div class="home-card-content1">
+              <h3 id="vis2">Service name</h3>
+              <span class="home-text07 Card-Text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                nec odio. Praesent libero.
+              </span>
             </div>
+          </div>
+          <div class="home-service-card2">
+            <div class="home-card-content2">
+              <h3 id="vis5">Service name</h3>
+              <span class="home-text09 Card-Text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                nec odio. Praesent libero.
+              </span>
+            </div>
+          </div>
         </div>
-            
-        <div class="pure-u-4-5" id="vis1"><p>Large Map</p></div>
+        <div class="home-hero2">
+          <h3 class="home-heading5">Regional to Metropolitan Distribution</h3>
+        </div>
+        <div id="services" class="home-services1">
+          <div class="home-service-card3">
+            <div class="home-card-content3">
+              <h3 id="vis4">Service name</h3>
+              <span class="home-text11 Card-Text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                nec odio. Praesent libero.
+              </span>
+            </div>
+          </div>
+          <div class="home-service-card4">
+            <div class="home-card-content4">
+              <h3  id="vis3">Service name</h3>
+              <span class="home-text13 Card-Text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                nec odio. Praesent libero.
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="home-hero3">
+          <h3 class="home-heading6">Project Delivery&nbsp;</h3>
+        </div>
+        <div class="home-service-card5">
+          <div id="about-us" class="home-about-us">
+            <div class="home-heading-container">
+              <h4 class="home-text14">
+                What's the story behind our product?
+              </h4>
+            </div>
+            <div id="vis6">
+       
+            </div>
+
+          </div>
+        </div>
+        <div class="home-section-separator1"></div>
+        <div id="features" class="home-features1">
+          <div class="home-cards-container1">
+            <div class="home-feature-card3">
+              <span class="home-text16 Card-Text">
+                All Data taken from the Victorian Government Capital Investment Dashboard and manually processed for State District, and filtered for projects vs programs available at <a href="https://www.dtf.vic.gov.au/capital-investment-dashboard">https://www.dtf.vic.gov.au/capital-investment-dashboard</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="pure-g">
-        <div class="pure-u-1-3" id="vis4"><p>Budget Sector allocation - Stacked Area</p></div>
-        <div class="pure-u-1-3" id="vis2"><p>Larger Stacked Area of Total Treasury</p></div>
-        <div class="pure-u-1-3"><p>Last year, we took a positive plan to the
-            Victorian people.
-            It was a plan for better hospitals, world‑class
-            schools, and the road and rail our growing
-            state needs.
-            It was a plan for cleaner, cheaper renewable
-            energy, a plan for the very best start in life for
-            our kids, and a plan to help Victorians with the
-            rising cost of living.
-            And with this Budget, we're delivering every
-            commitment we made at the last election,
-            all while repaying the COVID debt.
-            It was a plan to keep doing what matters.
-            This includes:
-            » $1 billion to bring back the State Electricity
-            Commission (SEC), re‑establishing
-            government‑owned energy and investing in
-            renewables
-            » $694 million for a road blitz to upgrade key
-            roads and intersections to improve network
-            efficiency, travel times and road safety
-            » $650 million to upgrade the Melton Line,
-            giving commuters in Melbourne’s West
-            better train services
-            » $601 million to buy 23 more VLocity trains
-            to be manufactured in Victoria, supporting
-            local jobs
-            » $450 million to support the delivery of new
-            and upgraded low‑fee Independent and
-            Catholic schools
-            » $400 million to deliver another round of the
-            $250 Power Saving Bonus, driving down the
-            cost of energy bills for Victorian households
-            » $320 million to plan the delivery of major
-            investments at seven hospitals across
-            the state to ensure Victorians receive the
-            highest quality healthcare
-            » $266 million to upgrade 43 government
-            schools across Victoria, giving our kids
-            the high‑quality classrooms and learning
-            facilities they deserve</p></div>
-    </div>
-    <div class="pure-g">
-        <div class="pure-u-1-3"><p>In Victoria, our health system has been
-            stretched like never before. Increases in
-            patients with COVID‑19 are just one part of
-            the picture: the pandemic also disrupted
-            care, slowed down recovery times, and saw
-            people putting off visits to their GP. All of this
-            has put huge demand on our hospitals and
-            healthcare professionals.
-            We’ve worked hard to ease that unprecedented
-            pressure on the system. Last year, we launched
-            our Pandemic Repair Plan for more staff, better
-            hospitals and first‑class care.
-            This is included in the $54 billion we’ve invested
-            in our healthcare system – as well as the
-            workers we need to run it – since coming to
-            government in 2014.
-            We’ll keep investing in health, so Victorians can
-            get the very best of care – where and when
-            they need it. This Budget provides a further
-            $4.9 billion to build and upgrade hospitals,
-            boost healthcare services and give our
-            healthcare workforce the support they need</p></div>
-        <div class="pure-u-1-3" id="vis3"><p>Movement of Center of Investment</p></div>
-        
-        <div class="pure-u-1-3" id="vis5"><p>Density Plot of Project Cost</p></div>
-    </div>
-    <div class="pure-g">
-        <div class="pure-u-2-3" id="vis6"><p>Gantt Chart</p></div>
-        <div class="pure-u-1-3"><p>The Victorian economy is strong and it’s growing.
-            Today, demand for workers is high, and there are
-            close to a record number of Victorians in work.
-            The unemployment rate is below 4 per cent as it
-            has been for most of the past year – which hasn’t
-            happened for nearly 50 years.
-            Across the world, countries are grappling with
-            high inflation and interest rate hikes – and
-            Australia is no different. But Victoria’s economy
-            will weather these challenges from a position
-            of strength.
-            In 2021-22, Victoria’s real gross state product
-            growth was the highest of any Australian
-            state. And it’s expected to remain solid this
-            financial year.
-            It’s this healthy economy – alongside everything
-            Victoria has to offer – that’s again attracting
-            large numbers of people to our state, with our
-            population growing by 300 people every day.
-            Out of a total $21.2 billion spent on
-            economic‑related measures, more than
-            $14 billion in support was provided to help
-            businesses and the economy survive and
-            recover. Crucially, these measures ensured the
-            Victorian economy could bounce back once
-            the worst of the pandemic was over.
-            Other important investments were made to
-            ensure our households and communities were
-            supported and strengthened</p></div>
-        
-        
-    </div>
-</body>
-<footer> <p> All Data taken from the Victorian Government Capital Investment Dashboard and manually processed for State District, and filtered for projects vs programs available at <a href="url">https://www.dtf.vic.gov.au/capital-investment-dashboard</a></p>
+    <script src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
+  </body>
 </html>

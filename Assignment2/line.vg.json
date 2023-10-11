@@ -3,7 +3,7 @@
     "width": 600,
     "height": 400,
     "data": { "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/regprop.csv" },
-    "title": "Proportion of Investment in designated Regional Districts",
+    "title": {"text": "Proportion of Investment in designated Regional Districts", "font":"VIC-Bold", "fontSize":20},
     "layer":[{
     "mark": "line",
     "encoding": {

@@ -1,5 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {"text":"Major Infrastructure Projects by State District", "dx": 0, "anchor": "middle", "fontSize":30, "font": "VIC-Bold"},
     "params": [{
         "name": "Budget_Year",
         "bind": { "input": "select", "options":["2016-17", "2019-20","2023-24"],
@@ -242,5 +243,5 @@
     
     }
   ],
-    "config": {"view": {"stroke": null}}
+    "config": {"view": {"stroke": null},"font":"VIC-Regular"}
 }

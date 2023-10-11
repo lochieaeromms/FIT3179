@@ -1,7 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": {"text": "Weighted Geographic Center of Investment","align": "center" ,
-    "dx": 450, "dy":0},
+    "title":  {"text": "Weighted Geographic Center of Investment by Year", "dx": 25, "anchor": "middle", "fontSize":20, "font": "VIC-Bold" },
     "params": [
         {"name": "Department",
         "bind": { "input": "select", "options":[ null, "Health and human services", "Transport","Culture, sport and community", "Justice and emergency services"],
@@ -210,5 +209,5 @@
       }
  }]}
     ],
-    "config": {"view": {"stroke": null},"font":"VIC-Regular"}
+    "config": {"view": {"stroke": null},"font":"VIC-Regular","padding":0}
 }

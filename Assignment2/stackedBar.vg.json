@@ -3,7 +3,7 @@
     "width": 600,
     "height": 400,
     "data": { "url": "https://raw.githubusercontent.com/lochieaeromms/FIT3179/main/Assignment2/masterlist.csv" },
-    "title": "Distribution of Investment by Sector",
+    "title": {"text": "Distribution of Investment by Sector", "dx": 0, "anchor": "middle", "fontSize":20, "font": "VIC-Bold" },
       "params":[
      {"name": "NewOrExisting",
           "bind": { "input": "select", "options":[null,"New", "Existing"],
@@ -41,14 +41,15 @@
         "aggregate": "sum", "field": "rate",
         "title": "Percentage of Capital Investment",
         "stack":  "zero",
-        "scale": {"domain": [0, 50]}
+        "scale": {"domain": [0, 50]}, 
+        "axis": {"grid": false}
       },
       "x": {"field": "Budget_Year", "title": "Budget Year","axis": {"labelAngle": 0,"ticks": false}},
       "color": {
         "scale": {"range":["#e41b4d", "#d7b5d8", "#df65b0","#f1eef6" ]},
       "field": "Sector",
       "legend":{
-        "offset":-30,
+        "offset":-180,
         "orient": "right"
       }
       },
