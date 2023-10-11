@@ -12,7 +12,9 @@
       "y": {"field": "Project_name", "type": "nominal","title":null, "axis":{"labelLimit":500, "labelPadding":10}},
       "x": {"field": "Start_date", "type": "temporal","title":null,"axis":{"format": "%b-%Y","formatType": "time"}},
       "x2": {"field": "Estimated_completion_date"},
-      "color": {"value":"#e41b4d"}
+      "color": {"value":"#e41b4d"},
+      "tooltip": [{"field": "Project_name","type":"nominal","title":"Project Name"},{"field": "Start_date", "type": "temporal", "title":"Start Date"},
+      {"field":"Estimated_completion_date", "type": "temporal", "title": "Estimated Completion"}, {"field": "Completion_date", "type":"temporal", "title": "Actual Completion"}]
     }
     },{
     "mark": "bar",
@@ -20,17 +22,29 @@
       "y": {"field": "Project_name", "type": "nominal"},
       "x": {"field": "Start_date", "type": "temporal"},
       "x2": {"field": "Completion_date"},
-      "color": {"value":"#d7b5d8"}, "opacity": {"value":0.7}
+      "color": {"value":"#d7b5d8"}, "opacity": {"value":0.7},
+      "tooltip": [{"field": "Project_name","type":"nominal","title":"Project Name"},{"field": "Start_date", "type": "temporal", "title":"Start Date"},
+      {"field":"Estimated_completion_date", "type": "temporal", "title": "Estimated Completion"}, {"field": "Completion_date", "type":"temporal", "title": "Actual Completion"}]
     }
     }, {
       "mark": {"type": "text","fontSize":20, "dx": 300,"dy":-200}, 
       "transform": [{"filter": "datum.Project_name=='Ballarat Line Upgrade'"}],
-      "encoding": {"text": {"value": "Projects that are delivered late"},"color": {"value":"#e41b4d"}}
+      "encoding": {"text": {"value": "Projects that were delivered early"},"color": {"value":"#e41b4d"}}
     },
      {
+      "mark": {"type": "text", "fontSize":20, "dx": 300, "dy": -225}, 
+      "transform": [{"filter": "datum.Project_name=='Ballarat Line Upgrade'"}],
+      "encoding": {"text": {"value": "Projects that were delivered late"}, "color":{"value":"#d7b5d8"}}
+    } ,
+    {
       "mark": {"type": "text", "fontSize":20, "dx": 300, "dy": -250}, 
       "transform": [{"filter": "datum.Project_name=='Ballarat Line Upgrade'"}],
-      "encoding": {"text": {"value": "Projects that are delivered early"}, "color":{"value":"#d7b5d8"}}
+      "encoding": {"text": {"value": "Original Project Timeline"}, "color":{"value":"#e41b4d"}}
+    } ,
+    {
+      "mark": {"type": "text", "fontSize":20, "dx": 300, "dy": -250}, 
+      "transform": [{"filter": "datum.Project_name=='Ballarat Line Upgrade'"}],
+      "encoding": {"text": {"value": "Original Project Timeline"}, "color":{"value":"#d7b5d8"},"opacity":{"value":0.7}}
     } ],
        "config": {"view": {"stroke": null},"font":"VIC-Regular"}
   }
