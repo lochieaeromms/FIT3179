@@ -195,7 +195,7 @@
 
         },
         "size": {"value": 100},
-        "color": {"field": "Budget_Year", "type": "nominal","scale": {"range":["#e41b4d", "#d7b5d8", "#df65b0","#f1eef6" ]},"legend": null},
+        "color": {"field": "Budget_Year", "type": "nominal","scale": {"range":["#e41b4d", "#df65b0","#d7b5d8"]},"legend": null},
         "opacity": {
         "condition": {
         "test": "length(data('data_2')) == 0" ,
