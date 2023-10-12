@@ -65,7 +65,7 @@
     }
       
 }]},{
-    "mark":{"type": "text", "align":"center","dx": 250,"fontWeight":"bold"},
+    "mark":{"type": "text", "align":"center","dx": 300,"fontWeight":"bold"},
     "transform": [{"filter":"datum.Project_name=='New Tarneit railway station'"}],
     "encoding": {"text":{"value": "Cost of Project ($mil)"}}
 }
