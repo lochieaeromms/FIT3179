@@ -207,7 +207,7 @@ body{
   margin-bottom: var(--dl-space-space-tripleunit);
 }
 .home-hero-text-container {
-  width: 35%;
+  width: 50%;
   height: 94px;
   display: flex;
   position: relative;
